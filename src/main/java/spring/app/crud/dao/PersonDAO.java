@@ -1,5 +1,7 @@
 package spring.app.crud.dao;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Component;
 import spring.app.crud.models.Person;
 
@@ -9,52 +11,17 @@ import java.util.List;
 
 @Component
 public class PersonDAO {
-    private static int peopleCount;
 
-    private static final String URL = "jdbc:postgresql://localhost:5432/db_for_springMVC";
-    private static final String USERNAME = "postgres";
-    private static final String PASSWORD = "postgres";
+    private JdbcTemplate jdbcTemplate;
 
-    private static Connection connection;
-
-    static {
-        try {
-            Class.forName("org.postgresql.Driver");
-        } catch (ClassNotFoundException e) {
-            e.printStackTrace();
-        }
-
-        try {
-            connection = DriverManager.getConnection(URL, USERNAME, PASSWORD);
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
+    @Autowired
+    public PersonDAO(JdbcTemplate jdbcTemplate) {
+        this.jdbcTemplate = jdbcTemplate;
     }
 
 
     public List<Person> index() {
-        List<Person> people = new ArrayList<>();
-
-        try {
-            Statement statement = connection.createStatement();
-            String SQL = "SELECT * FROM Person";
-            ResultSet result = statement.executeQuery(SQL);
-
-            while (result.next()) {
-                Person person = new Person();
-
-                person.setId(result.getInt("id"));
-                person.setName(result.getString("name"));
-                person.setAge(result.getInt("age"));
-                person.setEmail(result.getString("email"));
-
-                people.add(person);
-            }
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-
-        return people;
+        return jdbcTemplate.query("SELECT * FROM Person", new PersonMapper());
     }
 
     public Person show(int id) {
