@@ -8,32 +8,16 @@ public class Person {
     @Size(min = 2, max = 30, message = "Name should be between 2 and 30 characters")
     @Pattern(regexp = "[a-zA-Z]+", message = "Name can't contain numbers")
     private String name;
-    @Min(value = 1, message = "Age can't be less than 1")
-    private int age;
-    @NotEmpty(message = "Email can't be empty")
-    @Email(message = "Email should be valid")
-    private String email;
+    @Min(value = 1900, message = "Birth year should be greater than 1900")
+    private int bornYear;
 
-    @Pattern(regexp = "[A-Z]\\w+, [A-Z]\\w+, \\d{6}", message = "Address is not valid (Country, City, Postal code (6 digits)")
-    private String address;
-
-    public Person(int id, String name, int age, String email, String address) {
+    public Person(int id, String name, int year) {
         this.id = id;
         this.name = name;
-        this.age = age;
-        this.email = email;
-        this.address = address;
+        this.bornYear = year;
     }
 
     public Person() {
-    }
-
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
     }
 
     public String getName() {
@@ -44,27 +28,19 @@ public class Person {
         this.name = name;
     }
 
-    public int getAge() {
-        return age;
+    public int getBornYear() {
+        return bornYear;
     }
 
-    public void setAge(int age) {
-        this.age = age;
+    public void setBornYear(int bornYear) {
+        this.bornYear = bornYear;
     }
 
-    public String getEmail() {
-        return email;
+    public int getId() {
+        return id;
     }
 
-    public void setEmail(String email) {
-        this.email = email;
-    }
-
-    public String getAddress() {
-        return address;
-    }
-
-    public void setAddress(String address) {
-        this.address = address;
+    public void setId(int id) {
+        this.id = id;
     }
 }
