@@ -15,6 +15,7 @@ public class PersonValidator implements Validator {
     public PersonValidator(PersonDAO personDAO) {
         this.personDAO = personDAO;
     }
+
     @Override
     public boolean supports(Class<?> aClass) {
         return Person.class.equals(aClass);
@@ -23,7 +24,8 @@ public class PersonValidator implements Validator {
     @Override
     public void validate(Object o, Errors errors) {
         Person person = (Person) o;
-        if(personDAO.show(person.getEmail()).isPresent())
-            errors.rejectValue("email", "", "This is email is already used");
+
+        if (personDAO.getPersonByFullName(person.getFullName()).isPresent())
+            errors.rejectValue("fullName", "", "Человек с таким ФИО уже существует");
     }
 }
