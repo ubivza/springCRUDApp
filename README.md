@@ -1,5 +1,5 @@
 # springCRUDApp
-My simple spring crud project
+My simple Spring CRUD learning application
 
 It was writen using JDBCTemplate without JPA
 
