@@ -37,19 +37,19 @@ public class Book {
         this.id = id;
     }
 
-    public String getBookName() {
+    public String getTitle() {
         return title;
     }
 
-    public void setBookName(String title) {
+    public void setTitle(String title) {
         this.title = title;
     }
 
-    public String getBookAuthor() {
+    public String getAuthor() {
         return author;
     }
 
-    public void setBookAuthor(String author) {
+    public void setAuthor(String author) {
         this.author = author;
     }
 
